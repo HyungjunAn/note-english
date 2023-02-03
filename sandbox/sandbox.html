@@ -2,14 +2,25 @@
 <html>
     <head>
         <title>Github web page</title>
-    </head>
+        <script>
+          function check(box) {
+            if (box.checked) {
+              document.getElementById(box.value).style.display = 'block'
+            } else {
+              document.getElementById(box.value).style.display = 'none'
+            }
+          }
+        </script>
+    </head>    
     <body>
-	<h1>Hello!</h1>
-	<h3>Welcome</h3>
-	<h3 id=ko>ㄱㄴㄷ</h3>
-	<h3 id=en>abc</h3>
-	<script>
-		document.getElementById('ko').style.display = 'none'
-	</script>
+      <fieldset>
+        <label><input type="checkbox" name="color" value="ko" checked onClick=check(this)> Ko</label>
+        <label><input type="checkbox" name="color" value="en" checked onClick=check(this)> En</label>
+      </fieldset>
+
+      <h1>Hello!</h1>
+      <h3>Welcome</h3>
+      <h3 id=ko>ㄱㄴㄷ</h3>
+      <h3 id=en>abc</h3>
     </body>
 </html>
