@@ -103,7 +103,48 @@ function updateSubTopicSelect() {
     document.getElementById('select_topic').append(sel);
 }
 
+function parseSubContent() {
+    return document.createElement('div');
+}
+
+var lines = [];
+var lineNum = 0;
+var lineCnt = 1;
+
+function parseContent() {
+    var content = document.getElementById('content');
+    var xmlhttp = new XMLHttpRequest();
+
+    var resFiles = [
+        './res/daily.md',
+        './res/office.md',
+        './res/grammar.md'
+    ]    
+
+    for (const f of resFiles) {
+        var text;
+
+        xmlhttp.open("GET", f, false);
+        xmlhttp.send();
+
+        if (xmlhttp.status==200) {
+            text = xmlhttp.responseText;
+        }
+
+        lines = text.split(/\r?\n/);
+        console.log(lines);
+        div = document.createElement('div');
+        div.id = f.replace(/^\//, '').replace(/.*$/);
+
+        div.append(parseSubContent());
+
+        content.append(div);
+    }
+}
+
 window.onload = function () {
+    parseContent();
+
     var sel = document.getElementById('select_main_topic');
     var opt
     var mainTopicList = document.getElementsByClassName('main_topic');
