@@ -103,7 +103,24 @@ function updateSubTopicSelect() {
     document.getElementById('select_topic').append(sel);
 }
 
-function parseSubContent() {
+
+function isEnglishString(str) {
+    return true;
+}
+
+function _parseSubContent() {
+
+    if (lines[i].search(/^# /) === 0) {
+        
+    } else if (lines[i].search(/^## /) === 0) {
+    } else if (lines[i].search(/^- /) === 0) {    
+    } else if (lines[i].trim() === '') {
+    } else {
+
+    }
+
+
+
     return document.createElement('div');
 }
 
@@ -136,7 +153,7 @@ function parseContent() {
         div = document.createElement('div');
         div.id = f.replace(/^\//, '').replace(/.*$/);
 
-        div.append(parseSubContent());
+        div.append(_parseContent());
 
         content.append(div);
     }
