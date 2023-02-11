@@ -104,58 +104,96 @@ function updateSubTopicSelect() {
 }
 
 
+function reduceParseArr(arr, n) {
+    while (arr.length !== 1 && arr[arr.length - 1].head >= n) {
+        arr[arr.length - 2].element.append(arr[arr.length - 1].element);
+        arr.pop();
+    }
+
+    return arr;
+}
+
 function isEnglishString(str) {
     return true;
 }
 
-function _parseSubContent() {
+function parseFile(f) {
+    var arr = [];
+    var lines;
+    var xmlhttp = new XMLHttpRequest();
+    var div
+    var allowNewline = false;
 
-    if (lines[i].search(/^# /) === 0) {
-        
-    } else if (lines[i].search(/^## /) === 0) {
-    } else if (lines[i].search(/^- /) === 0) {    
-    } else if (lines[i].trim() === '') {
-    } else {
+    div = document.createElement('div');
+    div.id = f.replace(/.*\//,'').replace(/\..*$/,'');
+    div.className = 'main_topic';
+    
+    arr.push({head : 0, element : div})
 
+    xmlhttp.open("GET", f, false);
+    xmlhttp.send();
+
+    if (xmlhttp.status == 200) {
+        lines = xmlhttp.responseText.split(/\r?\n/);
     }
 
+    console.log(lines);
 
+    for (const line of lines) {
+        if (line.search(/^# /) === 0) {
+            arr = reduceParseArr(arr, 1);
+            div = document.createElement('div');
+            div.className = 'sub_topic';
+            div.id = 'sub_topic_' + line.replace(/^# /, '').replace(' ','_');
+            h1 = document.createElement('h1');
+            h1.textContent = line.replace(/^# /, '');
+            div.append(h1);
+            arr.push({head : 1, element : div});
+            allowNewline = false;
+        } else if (line.search(/^## /) === 0) {
+            arr = reduceParseArr(arr, 2);
+            div = document.createElement('div');
+            div.className = 'box';            
+            h2 = document.createElement('h2');
+            h2.textContent = line.replace(/^## /, '');
+            div.append(h2);
+            arr.push({head : 2, element : div});
+            allowNewline = false;
+        } else if (line.search(/^- /) === 0) {
+        } else if (line.trim() === '') {
+            if (allowNewline) {
+                arr[arr.length - 1].element.append(document.createElement('br'));
+            }
+            allowNewline = false;
+        } else {            
+            p = document.createElement('p');
+            
+            console.log(isEnglishString(line));
 
-    return document.createElement('div');
+            p.className = 'ko';            
+            p.textContent = line;
+            arr[arr.length - 1].element.append(p);
+            allowNewline = true;
+        }
+    }
+
+    arr = reduceParseArr(arr, 0);
+    console.log(arr);
+
+    return arr[0].element;  
 }
-
-var lines = [];
-var lineNum = 0;
-var lineCnt = 1;
 
 function parseContent() {
     var content = document.getElementById('content');
-    var xmlhttp = new XMLHttpRequest();
 
     var resFiles = [
         './res/daily.md',
         './res/office.md',
         './res/grammar.md'
-    ]    
+    ]
 
     for (const f of resFiles) {
-        var text;
-
-        xmlhttp.open("GET", f, false);
-        xmlhttp.send();
-
-        if (xmlhttp.status==200) {
-            text = xmlhttp.responseText;
-        }
-
-        lines = text.split(/\r?\n/);
-        console.log(lines);
-        div = document.createElement('div');
-        div.id = f.replace(/^\//, '').replace(/.*$/);
-
-        div.append(_parseContent());
-
-        content.append(div);
+        content.append(parseFile(f));
     }
 }
 
