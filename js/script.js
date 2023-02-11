@@ -114,7 +114,25 @@ function reduceParseArr(arr, n) {
 }
 
 function isEnglishString(str) {
-    return true;
+    var cntEn = 0;
+    var cntKo = 0;
+
+    cntEn = str.replace(/[^a-z]/gi, '').length;
+
+    for (const c of str) {
+        if (escape(c).length == 6) {
+            cntKo++;            
+        }
+    }
+
+    //console.log(str);
+    //console.log('cntEn: ' + cntEn + ' / ' + 'cntKo: ' + cntKo);
+
+    if (cntEn > cntKo) {
+        return true;
+    } else {
+        return false;
+    }    
 }
 
 function parseFile(f) {
@@ -135,9 +153,7 @@ function parseFile(f) {
 
     if (xmlhttp.status == 200) {
         lines = xmlhttp.responseText.split(/\r?\n/);
-    }
-
-    console.log(lines);
+    }    
 
     for (const line of lines) {
         if (line.search(/^# /) === 0) {
@@ -166,11 +182,14 @@ function parseFile(f) {
             }
             allowNewline = false;
         } else {            
-            p = document.createElement('p');
-            
-            console.log(isEnglishString(line));
+            p = document.createElement('p');            
 
-            p.className = 'ko';            
+            if (isEnglishString(line)) {
+                p.className = 'en';
+            } else {
+                p.className = 'ko';
+            }
+            
             p.textContent = line;
             arr[arr.length - 1].element.append(p);
             allowNewline = true;
@@ -178,19 +197,23 @@ function parseFile(f) {
     }
 
     arr = reduceParseArr(arr, 0);
-    console.log(arr);
+    //console.log(arr);
 
     return arr[0].element;  
 }
 
 function parseContent() {
-    var content = document.getElementById('content');
+    var content = document.getElementById('content');    
 
     var resFiles = [
         './res/daily.md',
         './res/office.md',
         './res/grammar.md'
     ]
+
+    if (window.location.hostname === 'localhost') {
+        resFiles.push('./test/test.md');
+    }
 
     for (const f of resFiles) {
         content.append(parseFile(f));
