@@ -12,8 +12,12 @@
   <div id=dummy></div>
   <div id=select>
     <div id="select_lang">
-      <label><input type="checkbox" name="color" value="ko" checked onClick=check(this)> Ko</label>
-      <label><input type="checkbox" name="color" value="en" checked onClick=check(this)> En</label>
+      <div>
+        <label><input type="checkbox" name="color" value="ko" checked onClick=check(this)> Ko</label>
+      </div>
+      <div>
+        <label><input type="checkbox" name="color" value="en" checked onClick=check(this)> En</label>
+      </div>
     </div>
     <div id="select_topic">
       <select id="select_main_topic" onchange=mainTopicChangeHandler()></select>
