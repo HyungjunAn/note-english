@@ -208,6 +208,7 @@ function parseContent() {
     var resFiles = [
         './res/daily.md',
         './res/office.md',
+        './res/confusion.md',
         './res/grammar.md'
     ]
 
@@ -222,6 +223,14 @@ function parseContent() {
 
 window.onload = function () {
     parseContent();
+
+    if (window.location.hostname === 'localhost') {
+        var meta = document.createElement('meta');
+
+        meta.httpEquiv="Expires";
+        meta.content="-1";
+        document.getElementsByTagName('head')[0].appendChild(meta);
+    }
 
     var sel = document.getElementById('select_main_topic');
     var opt
