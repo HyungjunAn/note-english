@@ -227,9 +227,9 @@ window.onload = function () {
     if (window.location.hostname === 'localhost') {
         var meta = document.createElement('meta');
 
-        meta.httpEquiv="Expires";
-        meta.content="-1";
-        document.getElementsByTagName('head')[0].appendChild(meta);
+        meta.httpEquiv="Cache-Control";
+        meta.content="no-cache, no-store, must-revalidate";
+        document.getElementsByTagName('head')[0].prepend(meta);
     }
 
     var sel = document.getElementById('select_main_topic');
