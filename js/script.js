@@ -206,6 +206,7 @@ function parseContent() {
     var content = document.getElementById('content');    
 
     var resFiles = [
+        './res/la_toddler.md',
         './res/daily.md',
         './res/office.md',
         './res/confusion.md',
