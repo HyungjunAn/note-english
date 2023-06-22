@@ -170,29 +170,13 @@ function parseFile(f) {
             div.append(h);
             arr.push({head : level, element : div});
             allowNewline = false;
-
-            
-        } else if (line.search(/^# /) === 0) {
-            arr = reduceParseArr(arr, 1);
-            div = document.createElement('div');
-            div.className = 'topic_level_1';
-            div.id = 'topic_level_1_' + line.replace(/^# /, '').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim, '_'); 
-            h1 = document.createElement('h1');
-            h1.textContent = line.replace(/^# /, '');
-            div.append(h1);
-            arr.push({head : 1, element : div});
-            allowNewline = false;
-        } else if (line.search(/^## /) === 0) {
-            arr = reduceParseArr(arr, 2);
-            div = document.createElement('div');
-            div.className = 'topic_level_2'
-            div.id = 'topic_level_2_' + line.replace(/^## /, '').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim, '_'); 
-            h2 = document.createElement('h2');
-            h2.textContent = line.replace(/^## /, '');
-            div.append(h2); 
-            arr.push({head : 2, element : div});
-            allowNewline = false;
         } else if (line.search(/^- /) === 0) {
+            ul = document.createElement('ul');
+            li = document.createElement('li');
+            li.textContent = line.replace(/^- /, '');
+            ul.append(li);
+            arr[arr.length - 1].element.append(ul);
+            allowNewline = true;
         } else if (line.trim() === '') {
             if (allowNewline) {
                 arr[arr.length - 1].element.append(document.createElement('br'));
@@ -213,8 +197,7 @@ function parseFile(f) {
         }
     }
 
-    arr = reduceParseArr(arr, 0);
-    //console.log(arr);
+    arr = reduceParseArr(arr, 0);    
 
     return arr[0].element;  
 }
@@ -251,23 +234,4 @@ window.onload = function () {
     }
 
     updateSelectTopic(0);
-/*
-    var sel = document.getElementById('select_topic_level_1');
-    var opt
-    var mainTopicList = document.getElementsByClassName('topic_level_1');
-
-    opt = document.createElement('option');
-    opt.value = 'All';
-    opt.text = 'All';
-    sel.append(opt);
-
-    for (const topic of mainTopicList) {
-        opt = document.createElement('option');
-        opt.value = topic.id;
-        opt.text = topic.id.replace(/^topic_level_1_/,'').replace(/_/, ' ');        
-        sel.append(opt);
-    }
-
-    updateSubTopicSelect('');
-*/
 }
