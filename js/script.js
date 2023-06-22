@@ -1,4 +1,4 @@
-var topicLevelNum = 2;
+var MAX_LEVEL = 0;
 
 function check(box) {
     matches = document.getElementsByClassName(box.value)
@@ -13,121 +13,42 @@ function check(box) {
     }
 }
 
-function mainTopicChangeHandler() {
-    updateSubTopicSelect();
-    topicChangeHandler();
-}
-
-function subTopicChangeHandler() {
-    topicChangeHandler();
-}
-
-function topicChangeHandler() {
-    var sel = document.getElementById('select_topic_level_1');
-    var opts = sel.getElementsByTagName('option');
-
-    for (const opt of opts) {
-        if (opt.value === 'All' && opt.selected) {
-            var topics = document.getElementsByClassName('topic_level_1');
-
-            for (const t of topics) {
-                t.style.display = 'block';
-            }
-            break;
-        } else if (opt.value !== 'All' && !opt.selected) {
-            document.getElementById(opt.value).style.display = 'none';
-        } else if (opt.value !== 'All' && opt.selected) {
-            document.getElementById(opt.value).style.display = 'block';
-        }
-    }
-
-    var subSel = document.getElementById('select_topic_level_2');
-    var subOpts = subSel.getElementsByTagName('option');
-
-    for (const subOpt of subOpts) {
-        if (subOpt.value === 'All' && subOpt.selected) {
-            var topics = document.getElementsByClassName('topic_level_2');
-
-            for (const t of topics) {
-                t.style.display = 'block';
-            }
-            break;
-        } else if (subOpt.value !== 'All' && !subOpt.selected) {
-            document.getElementById(subOpt.value).style.display = 'none';
-        } else if (subOpt.value !== 'All' && subOpt.selected) {
-            document.getElementById(subOpt.value).style.display = 'block';
-        }
-    }
-}
-
-function updateSubTopicSelect() {
-    document.getElementById('select_topic_level_2').remove();
-
-    var sel;
-    var opt;
-    var mainTopicList = [];
-
-    sel = document.getElementById('select_topic_level_1');
-
-    for (const opt of sel.getElementsByTagName("option")) {
-        if (opt.selected && opt.value === 'All') {
-            mainTopicList = document.getElementsByClassName('topic_level_1');
-            break;
-        }
-
-        if (opt.selected) {
-            mainTopicList = [document.getElementById(opt.value)]
-            break;
-        }
-    }
-
-    sel = document.createElement('select');
-
-    opt = document.createElement('option');
-    opt.value = 'All';
-    opt.text = 'All';
-    sel.append(opt);
-
-    for (const topic of mainTopicList) {
-        var subTopicList = document.getElementById(topic.id).getElementsByClassName('topic_level_2');
-
-        for (const subTopic of subTopicList) {
-            opt = document.createElement('option');
-            opt.value = subTopic.id;
-            opt.text = subTopic.id.replace(/^topic_level_2_/,'').replace(/_/, ' ');
-            sel.append(opt);
-        }
-    }
-
-    sel.id = 'select_topic_level_2';
-    sel.onchange = subTopicChangeHandler;
-    document.getElementById('select_topic').append(sel);
-}
-
 function updateDisplay(selectedLevel) {
-    if (selectedLevel === 0) {
-        return;
+    for (let topic_level = 1; topic_level <= MAX_LEVEL; topic_level++) {
+        var topics = document.getElementsByClassName('topic_level_' + topic_level);
+
+        for (const t of topics) {
+            t.style.display = 'block';
+        }
     }
 
-    for (let topic_level = selectedLevel; topic_level <= topicLevelNum; topic_level++) {
+    if (selectedLevel) {
         var sel = document.getElementById('select_topic_level_' + selectedLevel);
         var opts = sel.getElementsByTagName('option');
 
         for (const opt of opts) {
-            if (opt.value === 'All' && opt.selected) {
-                var topics = document.getElementsByClassName('topic_level_' + selectedLevel);
+            if (opt.value !== 'All' && opt.selected) {
 
-                for (const t of topics) {
-                    t.style.display = 'block';
+                for (const opt of opts) {
+                    if (opt.value !== 'All' && !opt.selected) {
+                        document.getElementById(opt.value).style.display = 'none';
+                    }
                 }
+
+                for (let topic_level = selectedLevel - 1; topic_level > 0; topic_level--) {
+                    var topics = document.getElementsByClassName('topic_level_' + topic_level);
+                    console.log(opt.value);
+                    for (const t of topics) {
+                        if (t.querySelector('#' + opt.value) === null) {
+                            t.style.display = 'none';                            
+                        }
+                    }
+                }
+                
                 break;
-            } else if (opt.value !== 'All' && !opt.selected) {
-                document.getElementById(opt.value).style.display = 'none';
-            } else if (opt.value !== 'All' && opt.selected) {
-                document.getElementById(opt.value).style.display = 'block';
             }
         }
-    }    
+    }   
 }
 
 function updateSelectTopic(selectedLevel) {
@@ -144,7 +65,7 @@ function updateSelectTopic(selectedLevel) {
         }
     }
 
-    for (let topic_level = selectedLevel + 1; topic_level <= topicLevelNum; ++topic_level) {            
+    for (let topic_level = selectedLevel + 1; topic_level <= MAX_LEVEL; ++topic_level) {            
         var sel;
         
         sel = document.getElementById('select_topic_level_' + topic_level);
@@ -165,9 +86,8 @@ function updateSelectTopic(selectedLevel) {
 
         for (const topic of topicList) {
             var opt = document.createElement('option');
-            opt.value = topic.id;
-            regex = RegExp('^topic_level_' + topic_level + '_', 'i');
-            opt.text = topic.id.replace(regex, '').replace(/_/, ' ');
+            opt.value = topic.id;            
+            opt.text = topic.firstChild.textContent;
             sel.append(opt);
         }
 
@@ -177,53 +97,6 @@ function updateSelectTopic(selectedLevel) {
     }
 
     updateDisplay(selectedLevel);
-
-    return;
-
-
-
-
-    document.getElementById('select_topic_level_2').remove();
-
-    var sel;
-    var opt;
-    var mainTopicList = [];
-
-    sel = document.getElementById('select_topic_level_1');
-
-    for (const opt of sel.getElementsByTagName("option")) {
-        if (opt.selected && opt.value === 'All') {
-            mainTopicList = document.getElementsByClassName('topic_level_1');
-            break;
-        }
-
-        if (opt.selected) {
-            mainTopicList = [document.getElementById(opt.value)]
-            break;
-        }
-    }
-
-    sel = document.createElement('select');
-
-    opt = document.createElement('option');
-    opt.value = 'All';
-    opt.text = 'All';
-    sel.append(opt);
-
-    for (const topic of mainTopicList) {
-        var subTopicList = document.getElementById(topic.id).getElementsByClassName('topic_level_2');
-
-        for (const subTopic of subTopicList) {
-            opt = document.createElement('option');
-            opt.value = subTopic.id;
-            opt.text = subTopic.id.replace(/^topic_level_2_/,'').replace(/_/, ' ');
-            sel.append(opt);
-        }
-    }
-
-    sel.id = 'select_topic_level_2';
-    sel.onchange = subTopicChangeHandler;
-    document.getElementById('select_topic').append(sel);
 }
 
 
@@ -277,11 +150,33 @@ function parseFile(f) {
     }    
 
     for (const line of lines) {
-        if (line.search(/^# /) === 0) {
+        if (line.search(/^#+ /) === 0) {
+            var level = 0;
+
+            while (line[level] === '#') {
+                level++;
+            }
+
+            if (MAX_LEVEL < level) {
+                MAX_LEVEL = level;
+            }
+
+            arr = reduceParseArr(arr, level);
+            div = document.createElement('div');
+            div.className = 'topic_level_' + level;
+            div.id = 'topic_level_' + level + '_' + line.replace(/^#+ /, '').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim, '_'); 
+            h = document.createElement('h' + level);
+            h.textContent = line.replace(/^#+ /, '');
+            div.append(h);
+            arr.push({head : level, element : div});
+            allowNewline = false;
+
+            
+        } else if (line.search(/^# /) === 0) {
             arr = reduceParseArr(arr, 1);
             div = document.createElement('div');
             div.className = 'topic_level_1';
-            div.id = 'topic_level_1_' + line.replace(/^# /, '').replace(' ','_');
+            div.id = 'topic_level_1_' + line.replace(/^# /, '').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim, '_'); 
             h1 = document.createElement('h1');
             h1.textContent = line.replace(/^# /, '');
             div.append(h1);
@@ -291,8 +186,8 @@ function parseFile(f) {
             arr = reduceParseArr(arr, 2);
             div = document.createElement('div');
             div.className = 'topic_level_2'
-            div.id = 'topic_level_2_' + line.replace(/^## /, '').replace(' ','_'); 
-            h2 = document.createElement('h2');            
+            div.id = 'topic_level_2_' + line.replace(/^## /, '').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim, '_'); 
+            h2 = document.createElement('h2');
             h2.textContent = line.replace(/^## /, '');
             div.append(h2); 
             arr.push({head : 2, element : div});
