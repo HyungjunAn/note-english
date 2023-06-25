@@ -91,7 +91,34 @@ I didn't go anywhere this summer.
 She didn't say anything to me.
 I'm not going to say anything to her. She is not going to believe me (anyway).
 
-## be 동사 친해지기 + 시제 적용
+## and / so / because
+
+My father drove throughout the entire(whole) trip
+Don't you have a driver's license?
+Yes. I got it last year and I even bought a car
+But I didn't practice so I still can't drive (very) well
+My mother can't drive because she has (very) bad eye-sight
+
+여행 내내 우리 아버지가 운전하셨어.
+너 운전면허증 있지 않아?
+응. 작년에 따서 심지어 차도 샀어.
+그런데 연습을 안해서 아직도 운전을 잘 못해.
+어머니는 시력이 너무 안좋으셔서 운전을 못하셔.
+
+## something / somewhere / someone
+
+항상 문장을 완성 상태로 말하지는 않는다.
+
+I need something
+I want to eat something
+I have(need) to go somewhere
+I have(need) to meet someone
+I need something light
+I need something lighter
+I want to eat something sweet
+I want to eat something really spicy
+I want to go somewhere quiet
+
 
 
 
