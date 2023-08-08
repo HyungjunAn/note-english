@@ -222,7 +222,7 @@ function parseContent() {
     }
 }
 
-window.onload = function () {
+window.onload = function () {    
     parseContent();
 
     if (window.location.hostname === 'localhost') {
@@ -232,6 +232,8 @@ window.onload = function () {
         meta.content="no-cache, no-store, must-revalidate";
         document.getElementsByTagName('head')[0].prepend(meta);
     }
+
+    document.documentElement.setAttribute('color-theme', 'dark');
 
     updateSelectTopic(0);
 }

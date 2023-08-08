@@ -1,3 +1,18 @@
+:root[color-theme='light'] {
+    --background: #fff;
+    --font-color: #000;    
+}
+
+:root[color-theme='dark'] {
+    --background: #000;
+    --font-color: #fff;
+}
+
+html {
+    background: var(--background);
+    color: var(--font-color);
+}
+
 div.box {
     border: 1px solid;
     padding-left: 20px;
