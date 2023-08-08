@@ -11,9 +11,9 @@ I cook
 I work out
 
 + every day -> 매일
-+ on weekends -> 주말에)
-+ in an office -> 사무실 안에서)
-+ mainly with books -> 주로 책으로)
++ on weekends -> 주말에
++ in an office -> 사무실 안에서
++ mainly with books -> 주로 책으로
 + at home -> 집에서
 + six hours a day -> 하루에 6시간씩
 + pretty well -> 꽤 잘
