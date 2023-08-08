@@ -4,8 +4,8 @@
 }
 
 :root[color-theme='dark'] {
-    --background: #000;
-    --font-color: #fff;
+    --background: #222;
+    --font-color: #ddd;
 }
 
 html {
