@@ -247,12 +247,14 @@ window.ontouchend = (e) => {
     let end_x = event.changedTouches[0].pageX;
   if(start_x > end_x){
     nextTopic();
-  }else{
+  } else if (start_x < end_x) {
     prevTopic();
   }
 }
 
 window.onkeydown = (e) => {
+    console.log(e)
+
     switch (e.key) {
     case 'ArrowLeft':        
         prevTopic();
