@@ -1,4 +1,5 @@
 var MAX_LEVEL = 0;
+var start_x = 0;
 
 function check(box) {
     matches = document.getElementsByClassName(box.value)
@@ -51,7 +52,7 @@ function updateDisplay(selectedLevel) {
     }   
 }
 
-function updateSelectTopic(selectedLevel) {
+function updateSelectTopic(selectedLevel = 0) {
     var element = document;    
 
     if (selectedLevel) {
@@ -222,6 +223,46 @@ function parseContent() {
     }
 }
 
+function nextTopic() {
+    var sel = document.getElementById('select_topic_level_1');
+    var newIndex = (sel.selectedIndex + sel.length + 1) % sel.length;
+
+    sel.getElementsByTagName("option")[newIndex].selected = true;
+    updateSelectTopic(1);
+}
+
+function prevTopic() {    
+    var sel = document.getElementById('select_topic_level_1');    
+    var newIndex = (sel.selectedIndex + sel.length - 1) % sel.length;
+
+    sel.getElementsByTagName("option")[newIndex].selected = true;
+    updateSelectTopic(1);
+}
+
+window.ontouchstart = (e) => {
+    start_x = event.touches[0].pageX
+}
+
+window.ontouchend = (e) => {
+    let end_x = event.changedTouches[0].pageX;
+  if(start_x > end_x){
+    nextTopic();
+  }else{
+    prevTopic();
+  }
+}
+
+window.onkeydown = (e) => {
+    switch (e.key) {
+    case 'ArrowLeft':        
+        prevTopic();
+        break;
+    case 'ArrowRight':        
+        nextTopic();
+        break;
+    }
+}
+
 window.onload = function () {    
     parseContent();
 
@@ -235,5 +276,5 @@ window.onload = function () {
 
     document.documentElement.setAttribute('color-theme', 'dark');
 
-    updateSelectTopic(0);
+    updateSelectTopic();
 }
