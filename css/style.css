@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap'); */
 
 :root[color-theme='light'] {
     --background: #fff;
@@ -13,8 +13,7 @@
 
 html {
     background: var(--background);
-    color: var(--font-color);
-    /* font-family: 'Nanum Gothic', sans-serif; */
+    color: var(--font-color);    
     font-family: "Roboto", "Noto Sans KR", sans-serif;
 }
 
