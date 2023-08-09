@@ -14,7 +14,7 @@ function check(box) {
     }
 }
 
-function updateDisplay(selectedLevel) {
+function updateDisplay(selectedLevel = 1) {
     for (let topic_level = 1; topic_level <= MAX_LEVEL; topic_level++) {
         var topics = document.getElementsByClassName('topic_level_' + topic_level);
 
@@ -106,7 +106,14 @@ function updateSelectTopic(selectedLevel = 0) {
         div.append(sel);
     }
 
-    updateDisplay(selectedLevel);
+    if (selectedLevel === 0) {
+        updateDisplay();
+    } else {
+        updateDisplay(selectedLevel);
+    }
+
+    var location = document.querySelector("#dummy").offsetTop;
+    window.scrollTo({top:location, behavior:'instant'});    
 }
 
 
