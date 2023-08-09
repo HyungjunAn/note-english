@@ -78,12 +78,14 @@ function updateSelectTopic(selectedLevel = 0) {
         var div = document.getElementById('select_topic');        
         var topicList = element.getElementsByClassName('topic_level_' + topic_level);
 
-        var opt = document.createElement('option');
-        opt.value = 'All';
-        opt.text = 'All';
+        sel = document.createElement('select');        
 
-        sel = document.createElement('select');
-        sel.append(opt);
+        if (topic_level !== 1) {
+            var opt = document.createElement('option');
+            opt.value = 'All';
+            opt.text = 'All';
+            sel.append(opt);
+        }
 
         for (const topic of topicList) {
             var opt = document.createElement('option');
@@ -91,6 +93,13 @@ function updateSelectTopic(selectedLevel = 0) {
             opt.text = topic.firstChild.textContent;
             sel.append(opt);
         }
+
+        if (topic_level === 1) {
+            var opt = document.createElement('option');
+            opt.value = 'All';
+            opt.text = 'All';
+            sel.append(opt);
+        }        
 
         sel.id = 'select_topic_level_' + topic_level;
         sel.onchange = function(){updateSelectTopic(topic_level);};
@@ -245,15 +254,20 @@ window.ontouchstart = (e) => {
 
 window.ontouchend = (e) => {
     let end_x = event.changedTouches[0].pageX;
-  if(start_x > end_x){
-    nextTopic();
-  } else if (start_x < end_x) {
-    prevTopic();
-  }
+
+    if (Math.abs(start_x - end_x) < 250) {
+        return;
+    }
+
+    if (start_x > end_x) {
+        nextTopic();
+    } else if (start_x < end_x) {
+        prevTopic();
+    }
 }
 
 window.onkeydown = (e) => {
-    console.log(e)
+    //console.log(e)
 
     switch (e.key) {
     case 'ArrowLeft':        
