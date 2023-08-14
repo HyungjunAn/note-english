@@ -13,12 +13,17 @@
   <div id=dummy></div>
   <div id=select>
     <div id="select_lang">
-      <div>
+      <select onChange=check2(this)>
+        <option value="all" selected>All</option>
+        <option value="ko">Ko</option>
+        <option value="en">En</option>
+      </select>      
+      <!-- <div>
         <label><input type="checkbox" name="color" value="ko" checked onClick=check(this)> Ko</label>
       </div>
       <div>
         <label><input type="checkbox" name="color" value="en" checked onClick=check(this)> En</label>
-      </div>
+      </div> -->
     </div>
     <div id="select_topic">
     </div>

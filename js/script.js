@@ -14,6 +14,28 @@ function check(box) {
     }
 }
 
+function check2(sel) {
+    var isAll = false;
+    var display = 'none'
+
+    console.log('test');
+
+    if (sel.options[sel.selectedIndex].value === 'all') {
+        isAll = true;
+    }    
+
+    for (var i = 0; i < sel.length; ++i) {
+        if (isAll || sel.options[i].value === sel.options[sel.selectedIndex].value) {
+            display = 'block';            
+        } else {
+            display = 'none';
+        }
+
+        matches = document.getElementsByClassName(sel.options[i].value);
+        Array.from(matches).forEach((e) => { e.style.display = display });
+    }
+}
+
 function updateDisplay(selectedLevel = 1) {
     for (let topic_level = 1; topic_level <= MAX_LEVEL; topic_level++) {
         var topics = document.getElementsByClassName('topic_level_' + topic_level);
@@ -223,18 +245,18 @@ function parseContent() {
     var content = document.getElementById('content');    
 
     var resFiles = [
-        './res/la_toddler.md',
-        './res/daily.md',
-        './res/office.md',
-        './res/confusion.md',
-        './res/grammar.md'
+        './res/la_toddler.txt',
+        './res/daily.txt',
+        './res/office.txt',
+        './res/confusion.txt',
+        './res/grammar.txt'
     ]
 
     if (window.location.hostname === 'localhost') {
-        resFiles.push('./test/test.md');
+        resFiles.push('./test/test.txt');
     }
 
-    for (const f of resFiles) {        
+    for (const f of resFiles) {
         content.append(parseFile(f));
     }
 }

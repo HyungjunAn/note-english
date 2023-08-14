@@ -105,6 +105,57 @@ My mother can't drive because she has (very) bad eye-sight
 그런데 연습을 안해서 아직도 운전을 잘 못해.
 어머니는 시력이 너무 안좋으셔서 운전을 못하셔.
 
+## There is(are)
+
+"~이(가) 있다" 라는 뜻임
+(기본적으로 존재를 말하는 것이지 위치를 말하는 것이 아님)
+
+There are many(a lot of) people.
+There is a person
+There is a lot of traffic
+There is a lot of time
+There is a problem
+There are many problems
+
+"~이(가) 없다": There is(are) no + ~
+
+There is no bathroom here.
+There are no bathrooms here.
+There is no time.
+
+"이 근처에": near here / nearby
+
+There are many(a lot of) good restaurants nearby(near here)
+There are no good restaurants nearby(near here)
+
+"~이(가) 적다 / 별로 없다": There is(are) not many(a lot of)
+
+There aren't many(a lot of) people.
+
+## There is(are) vs. I have
+
+There is(are)보다 have를 쓰는 경우
+(There is(are)는 소유의 성격이 약할 때 주로 씀)
+I have 2 bedrooms
+I have a big window in my room
+My room has a big window
+
+There is no crosswalk nearby
+They have a lot of tables
+
+Is there a department store nearby(near hear)?
+Is there a gas station nearby(near there)?
+
+Do they have (any) seafood?
+
+
+## to + V
+
+It's important to exercise at least once or twice a week.
+It's not easy to do that
+(do that: 그렇게 하기)
+
+
 ## something / somewhere / someone
 
 항상 문장을 완성 상태로 말하지는 않는다.
@@ -118,6 +169,48 @@ I need something lighter
 I want to eat something sweet
 I want to eat something really spicy
 I want to go somewhere quiet
+
+## 시간(돈)이 걸리다(들다)
+많이 쓰는 동사
+- 시간이 걸리다: take
+- 돈이 든다: cost
+
+It takes 5 minutes.
+-> 5분 걸려요.
+
+It costs 5000 won.
+-> 5000원 들어요.
+
+costs 발음
+- "츠"가 아님
+- ㅆ+ㅌ+ㅆ 같은 발음임
+- s를 발음 안 해버리면 과거형이랑 혼동될 수 있으니 주의
+
+It takes a lot of time.
+-> 시간이 많이 걸려요.
+It took a lot of time.
+It took a long time.
+-> 시간이 오래 걸렸어요.
+It's going to take a lot of time / a long time / long
+-> 시간이 많이 걸릴거에요.
+It's going to cost a lot of money.
+-> 돈이 많이 들거에요.
+It doesn't take very long. / a lot of time. / long.
+-> 시간이 많이(오래) 안걸려요.
+It didn't take very long.
+-> 시간이 많이(오래) 안걸렸어요.
+It's not going to take very long.
+-> 시간이 많이(오래) 걸리지 않을거에요.
+
+It costs a lot of money. (* of money 생략 가능)
+It cost a lot of money. (* cost는 과거형이 똑같음)
+It doesn't cost (very much).
+It didn't cost (very much).
+It's not going to cost very much
+
+(* very long, very much를 실생활에서 많이 씀)
+
+
 
 
 

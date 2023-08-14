@@ -23,10 +23,6 @@ div.box {
     padding-right: 20px;
 }
 
-#dummy {
-    height: 60px;
-}
-
 #select {
     position: fixed;
     left: 0;
@@ -39,15 +35,19 @@ div.box {
 
 #select_lang {    
     float: left;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #select_topic {
     float: left;
-    padding-left: 40px;
-    padding-top: 40px;
-    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#dummy {
+    height: 60px;    
 }
 
 label, select {
